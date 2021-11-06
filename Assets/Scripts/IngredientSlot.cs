@@ -17,7 +17,7 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     private Text textCount;
 
-    void Awake() 
+    void Awake()
     {
         cupBoard = this.gameObject.GetComponentInParent<CupBoard>();
         image = this.gameObject.GetComponent<Image>();
@@ -26,14 +26,14 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
         SetColor(0);
     }
 
-    private void SetColor(float alpha) 
+    private void SetColor(float alpha)
     {
         Color color = image.color;
         color.a = alpha;
         image.color = color;
     }
 
-    public void AddIngredient(Ingredient item, float count = 1) 
+    public void AddIngredient(Ingredient item, float count = 1)
     {
         this.ingredient = item;
         this.amountCount = count;
@@ -45,28 +45,7 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
         SetColor(1);
     }
 
-    public void SetSlotCount(float count) 
-    {
-        amountCount += count;
-        textCount.text = amountCount.ToString();
-
-        if (amountCount <= 0) {
-            ClearSlot();
-        }
-    }
-
-    private void ClearSlot() 
-    {
-        ingredient = null;
-        amountCount = 0;
-        image.sprite = null;
-        SetColor(0);
-
-        textCount.text = "0";
-        textCount.gameObject.SetActive(false);
-    }
-
-    public void OnPointerClick(PointerEventData eventData) 
+    public void OnPointerClick(PointerEventData eventData)
     {
         cupBoard.SelectSlot(this);
     }
