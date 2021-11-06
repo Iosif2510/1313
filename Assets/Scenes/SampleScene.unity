@@ -157,10 +157,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 258515aaa9e8a074f85bea8e3fae6f46, type: 2}
   - {fileID: 11400000, guid: 6fba05c8c2bdf15469edd9483763089a, type: 2}
   - {fileID: 11400000, guid: 2a8ca0519d6c8544e8841355c4b1c73d, type: 2}
+  - {fileID: 11400000, guid: f087ada78c188514c95a2ae910481559, type: 2}
   ingredientsAmount:
   - 750
   - 300
   - 1000
+  - 600
   maxInvenSize: 300
 --- !u!4 &102321336
 Transform:
@@ -557,9 +559,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barServeManager: {fileID: 1506494051}
   currentContainer: {fileID: 11400000, guid: 555162a536e341a49b5db60d07dd2f10, type: 2}
-  containerList: []
-  containerAmounts: []
+  techniqueList: []
   garnishList: []
+  blandness: 0
+  smoothness: 0
   currentAmount: 0
   fullAmount: 0
 --- !u!1 &360818756

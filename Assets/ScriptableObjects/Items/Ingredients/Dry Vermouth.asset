@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Dry Vermouth
   ingredientType: 0
-  ingredientImage: {fileID: 0}
+  ingredientImage: {fileID: 21300000, guid: 0b24b020881229543913f1522ac4e10c, type: 3}
   grade: 3
   fullAmount: 750
   liquorType: 9
