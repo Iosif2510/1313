@@ -34,46 +34,56 @@ public class CupBoard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    private void OpenInventory() {
+    private void OpenInventory()
+    {
         //TODO open animation
         inventoryBase.SetActive(true);
     }
 
-    private void CloseInventory() {
+    private void CloseInventory()
+    {
         //TODO close animation
         inventoryBase.SetActive(false);
     }
 
     // cupBoard index = cupBoardAmount index = slots index
-    public void LoadSlot(int page = 0) {
-        for (int i = page * pageSize; i < (page + 1) * pageSize; i++) {
-            if (i >= cupBoard.Count) {
+    public void LoadSlot(int page = 0)
+    {
+        for (int i = page * pageSize; i < (page + 1) * pageSize; i++)
+        {
+            if (i >= cupBoard.Count)
+            {
                 slots[i].gameObject.SetActive(false);
             }
             // Debug.Log(cupBoard[i].ingredientName);
-            else {
+            else
+            {
                 slots[i].gameObject.SetActive(true);
                 slots[i].AddIngredient(cupBoard[i], cupBoardAmount[i]);
             }
-            
+
         }
         //TODO 슬라이드 구현
     }
 
-    public void SelectSlot(IngredientSlot slot) {
+    public void SelectSlot(IngredientSlot slot)
+    {
         int slotIndex = -1;
-        if (!slot.isSelected) {
-            for (int i = 0; i < slots.Length; i++) {
+        if (!slot.isSelected)
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
                 slots[i].isSelected = false;
                 if (slots[i] == slot) slotIndex = i;
             }
             slot.isSelected = true;
             barServeManager.SelectSlot(slot, slotIndex);
         }
-        else {
+        else
+        {
             slot.isSelected = false;
             barServeManager.UnSelectSlot();
         }

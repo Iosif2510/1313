@@ -16,7 +16,7 @@ public class BarServeManager : MonoBehaviour
 
     public int selectedPourAmount;
 
-    
+
 
     // Start is called before the first frame update
     void Awake()
@@ -30,49 +30,67 @@ public class BarServeManager : MonoBehaviour
         // selectedAmountText.text = "Pour Amount: " + selectedPourAmount.ToString();
     }
 
-    public void SelectSlot(IngredientSlot slot, int index) {
+    public void SelectSlot(IngredientSlot slot, int index)
+    {
         selectedSlot = slot;
         selectedIndex = index;
         selectedPourAmount = 0;
     }
 
-    public void UnSelectSlot() {
+    public void UnSelectSlot()
+    {
         selectedSlot = null;
         selectedIndex = -1;
         selectedPourAmount = 0;
     }
 
-    void SelectAmount(int amount) {
-        if ((selectedSlot != null) && (selectedSlot.amountCount >= amount)) {
+    void SelectAmount(int amount)
+    {
+        if ((selectedSlot != null) && (selectedSlot.amountCount >= amount))
+        {
             this.selectedPourAmount = amount;
         }
     }
 
-    public void Select1Oz() {
+    public void Select1Oz()
+    {
         SelectAmount(30);
     }
 
-    public void SelectHalfOz() {
+    public void SelectHalfOz()
+    {
         SelectAmount(15);
     }
 
-    public void SelectThirdOz() {
+    public void SelectThirdOz()
+    {
         SelectAmount(10);
     }
 
-    public void SelectDash() {
+    public void SelectDash()
+    {
         SelectAmount(1);
     }
 
-    public void Pour() {
-        if ((selectedSlot != null) && (selectedPourAmount != 0)) {
-            if (inventory.ingredientsAmount[selectedIndex] < selectedPourAmount) {
-                //TODO 용량부족
+    public void Pour()
+    {
+        if ((selectedSlot != null) && (selectedPourAmount != 0))
+        {
+            if (inventory.ingredientsAmount[selectedIndex] < selectedPourAmount)
+            {
+                //TODO 남은 아이템 양 부족
                 return;
             }
             int actualPour = container.Pour(selectedSlot.ingredient, selectedPourAmount);
-            
-            inventory.UseIngredient(selectedIndex, actualPour);
+
+            if (actualPour >= 0)
+            {
+                inventory.UseIngredient(selectedIndex, actualPour);
+            }
+            else
+            {
+                //TODO 컨테이너 용량 부족 애니메이션
+            }
         }
     }
 
