@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0778832b4434340b73520d856d374a, type: 3}
+  m_Name: Dry Martini
+  m_EditorClassIdentifier: 
+  recipeList:
+  - {fileID: 11400000, guid: 2a8ca0519d6c8544e8841355c4b1c73d, type: 2}
+  - {fileID: 11400000, guid: f087ada78c188514c95a2ae910481559, type: 2}
+  - {fileID: 11400000, guid: f1edc11a20d734f47a53ada11185f09d, type: 2}
+  recipeAmounts:
+  - 60
+  - 10
+  - 10
+  glass: {fileID: 11400000, guid: a7c9febd0b8a2784d9cc5b1fe5a8f482, type: 2}
+  garnishList:
+  - {fileID: 11400000, guid: 7506e83a7b8f4bf43b521a692c84ce13, type: 2}
