@@ -34,9 +34,9 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
 
 
     [SerializeField]
-    private int currentAmount;   // 현재 담긴 양
+    private float currentAmount;   // 현재 담긴 양
     [SerializeField]
-    private int fullAmount;      // 잔의 총 용량
+    private float fullAmount;      // 잔의 총 용량
 
     // Start is called before the first frame update
     void Awake()
@@ -51,27 +51,48 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
         ingredientList.Add(currentIngredients);
     }
 
-    public int Pour(Ingredient ingredient, int amount)
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            PrintContainer();
+        }
+    }
+
+    public float Pour(Ingredient ingredient, float amount)
     {
         //* 부은 진짜 양을 리턴
         if (currentAmount == fullAmount)
         {
             // 잔이 꽉 찼을 경우
             //TODO 용량부족
+            Debug.Log("Not Enough Space!");
             return -1;
         }
         if (currentAmount + amount > fullAmount)
         {
             // 따르라는 양이 빈 용량보다 많은 경우, 빈 용량만큼만 따르기
-            //// containerList.Add((ingredient, fullAmount - currentAmount));
-            currentIngredients.Add(ingredient, fullAmount - currentAmount);
-            return (fullAmount - currentAmount);
+            float pouredAmount = fullAmount - currentAmount;
+            IngredientAdd(ingredient, pouredAmount);
+            return pouredAmount;
         }
         else
         {
-            // // containerList.Add((ingredient, amount));
-            currentIngredients.Add(ingredient, amount);
+            IngredientAdd(ingredient, amount);
             return amount;
+        }
+    }
+
+    private void IngredientAdd(Ingredient ingredient, float amount)
+    {
+        currentAmount += amount;
+        if (currentIngredients.ContainsKey(ingredient))
+        {
+            currentIngredients[ingredient] += amount;
+        }
+        else
+        {
+            currentIngredients.Add(ingredient, amount);
         }
     }
 

@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour
         AcquireIngredient(item, amount);
     }
 
-    public void AcquireIngredient(Ingredient item, float count = 1)
+    public void AcquireIngredient(Ingredient item, float count)
     {
         if ((item.ingredientType == IngredientType.Liquor) || (item.ingredientType == IngredientType.NonAlcohol))
         {
@@ -96,12 +96,13 @@ public class Inventory : MonoBehaviour
         if (cupBoard != null) cupBoard.LoadSlot();
     }
 
-    public void UseIngredient(int index, int count = 1)
+    public int UseIngredient(int index, float count)
     {
         //reverse
         if (ingredientsAmount[index] < count)
         {
             //TODO 용량부족
+            return -1;
         }
         else
         {
@@ -109,14 +110,18 @@ public class Inventory : MonoBehaviour
             {
                 ingredients.RemoveAt(index);
                 ingredientsAmount.RemoveAt(index);
+                if (cupBoard != null) cupBoard.LoadSlot();
+                return 1;
             }
             else
             {
                 ingredientsAmount[index] -= count;
+                if (cupBoard != null) cupBoard.LoadSlot();
+                return 0;
             }
         }
 
-        if (cupBoard != null) cupBoard.LoadSlot();
+
     }
 
 }
