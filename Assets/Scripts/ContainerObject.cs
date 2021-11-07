@@ -51,7 +51,15 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
         ingredientList.Add(currentIngredients);
     }
 
-    public int Pour(Ingredient ingredient, int amount)
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            PrintContainer();
+        }
+    }
+
+    public float Pour(Ingredient ingredient, float amount)
     {
         //* 부은 진짜 양을 리턴
         if (currentAmount == fullAmount)

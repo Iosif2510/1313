@@ -14,8 +14,7 @@ public class BarServeManager : MonoBehaviour
     public IngredientSlot selectedSlot;
     public int selectedIndex = -1;
 
-    public int selectedPourAmount;
-
+    public float selectedPourAmount;
 
 
     // Start is called before the first frame update
@@ -44,7 +43,7 @@ public class BarServeManager : MonoBehaviour
         selectedPourAmount = 0;
     }
 
-    void SelectAmount(int amount)
+    void SelectAmount(float amount)
     {
         if ((selectedSlot != null) && (selectedSlot.amountCount >= amount))
         {
@@ -67,6 +66,11 @@ public class BarServeManager : MonoBehaviour
         SelectAmount(10);
     }
 
+    public void SelectQuarterOz()
+    {
+        SelectAmount(7.5f);
+    }
+
     public void SelectDash()
     {
         SelectAmount(1);
@@ -81,7 +85,7 @@ public class BarServeManager : MonoBehaviour
                 //TODO 남은 아이템 양 부족
                 return;
             }
-            int actualPour = container.Pour(selectedSlot.ingredient, selectedPourAmount);
+            float actualPour = container.Pour(selectedSlot.ingredient, selectedPourAmount);
 
             if (actualPour >= 0)
             {

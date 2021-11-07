@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour
         AcquireIngredient(item, amount);
     }
 
-    public void AcquireIngredient(Ingredient item, float count = 1)
+    public void AcquireIngredient(Ingredient item, float count)
     {
         if ((item.ingredientType == IngredientType.Liquor) || (item.ingredientType == IngredientType.NonAlcohol))
         {
@@ -96,7 +96,7 @@ public class Inventory : MonoBehaviour
         if (cupBoard != null) cupBoard.LoadSlot();
     }
 
-    public void UseIngredient(int index, int count = 1)
+    public void UseIngredient(int index, float count)
     {
         //reverse
         if (ingredientsAmount[index] < count)
