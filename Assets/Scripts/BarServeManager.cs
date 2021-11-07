@@ -29,6 +29,11 @@ public class BarServeManager : MonoBehaviour
         // selectedAmountText.text = "Pour Amount: " + selectedPourAmount.ToString();
     }
 
+    void Update()
+    {
+        selectedAmountText.text = $"Selected: {selectedIndex}, Amount = {selectedPourAmount}";
+    }
+
     public void SelectSlot(IngredientSlot slot, int index)
     {
         selectedSlot = slot;
@@ -83,17 +88,23 @@ public class BarServeManager : MonoBehaviour
             if (inventory.ingredientsAmount[selectedIndex] < selectedPourAmount)
             {
                 //TODO 남은 아이템 양 부족
+                Debug.Log($"Not enough Ingredient!");
                 return;
             }
             float actualPour = container.Pour(selectedSlot.ingredient, selectedPourAmount);
 
             if (actualPour >= 0)
             {
-                inventory.UseIngredient(selectedIndex, actualPour);
+                int ret = inventory.UseIngredient(selectedIndex, actualPour);
+                if (ret == 1)
+                {
+                    UnSelectSlot();
+                }
             }
             else
             {
                 //TODO 컨테이너 용량 부족 애니메이션
+                Debug.Log($"Not enough Container Space!");
             }
         }
     }
