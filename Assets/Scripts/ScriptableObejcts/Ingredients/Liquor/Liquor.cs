@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum LiquorType
+{
+    Gin,
+    Rum,
+    Vodka,
+    Whiskey,
+    Brandy,
+    Tequila,
+    Absinthe,
+    Cachaca,
+    Soju,
+    Wine,
+    Liqueur,
+    Bitters
+}
+
 //// [CreateAssetMenu(fileName = "New Liquor", menuName = "Ingredients/Liquor", order = 1)]
 public class Liquor : Ingredient
 {
-    public enum LiquorType
-    {
-        Gin,
-        Rum,
-        Vodka,
-        Whiskey,
-        Brandy,
-        Tequila,
-        Absinthe,
-        Cachaca,
-        Soju,
-        Wine,
-        Liqueur,
-        Bitters
-    }
-
     public LiquorType liquorType;
     public int proof;   //200기준
     public int density; //비중, 100기준
