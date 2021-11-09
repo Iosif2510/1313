@@ -53,14 +53,14 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
         ingredientList.Add(currentIngredients);
     }
 
-    void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            // PrintContainer();
-            Debug.Log(ObjectToJson(ingredientList));
-        }
-    }
+    // void Update()
+    // {
+    //     if (Input.GetKeyUp(KeyCode.Space))
+    //     {
+    //         // PrintContainer();
+    //         Debug.Log(ObjectToJson(ingredientList));
+    //     }
+    // }
 
     public float Pour(Ingredient ingredient, float amount)
     {
@@ -126,33 +126,6 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
         Debug.Log("Container Click");
         barServeManager.Pour();
         // PrintContainer();
-    }
-
-    public int GradeRecipe(Recipe recipe)
-    {
-        int dictionaryIndex = 0;
-        for (int recipeIndex = 0; recipeIndex < recipe.RecipeList.Count; recipeIndex++)
-        {
-            var asset = recipe.RecipeList[recipeIndex];
-            if (asset.GetType() == typeof(Technique))
-            {
-                dictionaryIndex++;
-                //TODO techniqueList 비교
-            }
-            else
-            {
-                if (ingredientList[dictionaryIndex].ContainsKey((Ingredient)asset))
-                {
-                    //TODO 레시피 양과 실제 양 비교, 채점
-                }
-                else
-                {
-                    //TODO 레시피에 없는 재료 삽입, 감점
-                }
-            }
-        }
-
-        return -1;
     }
 
     public void PrintContainer()
