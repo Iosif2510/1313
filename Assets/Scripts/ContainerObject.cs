@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -53,14 +52,16 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
         ingredientList.Add(currentIngredients);
     }
 
-    // void Update()
-    // {
-    //     if (Input.GetKeyUp(KeyCode.Space))
-    //     {
-    //         // PrintContainer();
-    //         Debug.Log(ObjectToJson(ingredientList));
-    //     }
-    // }
+    void Update()
+    {
+        // if (Input.GetKeyUp(KeyCode.Space))
+        // {
+        //     string jsonData = ObjectToJson(ingredientList);
+        //     Debug.Log(jsonData);
+        //     var tempList = JsonToObject<List<Dictionary<Ingredient, float>>>(jsonData);
+        //     PrintContainer(tempList);
+        // }
+    }
 
     public float Pour(Ingredient ingredient, float amount)
     {
@@ -110,8 +111,8 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
         ingredientList.Add(currentIngredients);
 
         // calculate blandness, smoothness
-        blandness = amount * technique.blandPerSecond;
-        smoothness = amount * technique.smoothPerSecond;
+        // blandness = amount * technique.blandPerSecond;
+        // smoothness = amount * technique.smoothPerSecond;
 
         // 시발...이렇게쉬운걸
     }
@@ -128,7 +129,7 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
         // PrintContainer();
     }
 
-    public void PrintContainer()
+    public void PrintContainer(List<Dictionary<Ingredient, float>> ingredientList)
     {
         for (int i = 0; i < ingredientList.Count; i++)
         {
@@ -146,5 +147,10 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
     public string ObjectToJson(object obj)
     {
         return JsonConvert.SerializeObject(obj);
+    }
+
+    public T JsonToObject<T>(string jsonData)
+    {
+        return JsonConvert.DeserializeObject<T>(jsonData);
     }
 }
