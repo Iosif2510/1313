@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Newtonsoft.Json;
 
 public class ContainerObject : MonoBehaviour, IPointerClickHandler
 {
@@ -11,13 +11,15 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
     public Container currentContainer;
     private Image containerImage;
 
-    // public List<(ScriptableObject, float)> containerList = new List<(ScriptableObject, float)>();
+    //* Recipe
     public List<Dictionary<Ingredient, float>> ingredientList = new List<Dictionary<Ingredient, float>>();
     public List<Technique> techniqueList = new List<Technique>();
     public List<Garnish> garnishList;
 
     public float blandness;
     public float smoothness;
+
+    //* RecipeEnd
 
     // 기법과 기법 사이, 현재 섞을 재료 및 용량
     private Dictionary<Ingredient, float> currentIngredients;
@@ -29,7 +31,6 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
         ingredientList[index]를 넣은 다음 techniqueList[index] 기법 사용
         즉 기법 사용 시 재료가 섞이므로 기법 앞 재료 순서는 무의미
         ㄴ 플로트 기법 사용 시 각 재료 사이마다 기법 객체 더해줘야함
-
     */
 
 
@@ -53,10 +54,13 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            PrintContainer();
-        }
+        // if (Input.GetKeyUp(KeyCode.Space))
+        // {
+        //     string jsonData = ObjectToJson(ingredientList);
+        //     Debug.Log(jsonData);
+        //     var tempList = JsonToObject<List<Dictionary<Ingredient, float>>>(jsonData);
+        //     PrintContainer(tempList);
+        // }
     }
 
     public float Pour(Ingredient ingredient, float amount)
@@ -73,17 +77,17 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
         {
             // 따르라는 양이 빈 용량보다 많은 경우, 빈 용량만큼만 따르기
             float pouredAmount = fullAmount - currentAmount;
-            IngredientAdd(ingredient, pouredAmount);
+            AddIngredient(ingredient, pouredAmount);
             return pouredAmount;
         }
         else
         {
-            IngredientAdd(ingredient, amount);
+            AddIngredient(ingredient, amount);
             return amount;
         }
     }
 
-    private void IngredientAdd(Ingredient ingredient, float amount)
+    private void AddIngredient(Ingredient ingredient, float amount)
     {
         currentAmount += amount;
         if (currentIngredients.ContainsKey(ingredient))
@@ -107,8 +111,8 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
         ingredientList.Add(currentIngredients);
 
         // calculate blandness, smoothness
-        blandness = amount * technique.blandPerSecond;
-        smoothness = amount * technique.smoothPerSecond;
+        // blandness = amount * technique.blandPerSecond;
+        // smoothness = amount * technique.smoothPerSecond;
 
         // 시발...이렇게쉬운걸
     }
@@ -125,12 +129,7 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
         // PrintContainer();
     }
 
-    void CheckRecipe()
-    {
-
-    }
-
-    public void PrintContainer()
+    public void PrintContainer(List<Dictionary<Ingredient, float>> ingredientList)
     {
         for (int i = 0; i < ingredientList.Count; i++)
         {
@@ -143,5 +142,15 @@ public class ContainerObject : MonoBehaviour, IPointerClickHandler
                 Debug.Log(techniqueList[i].ToString());
             }
         }
+    }
+
+    public string ObjectToJson(object obj)
+    {
+        return JsonConvert.SerializeObject(obj);
+    }
+
+    public T JsonToObject<T>(string jsonData)
+    {
+        return JsonConvert.DeserializeObject<T>(jsonData);
     }
 }

@@ -15,4 +15,4 @@ MonoBehaviour:
   containerType: 1
   containerSprite: {fileID: 21300000, guid: 293b2cfcdbf2dd6459abf1b3bb2e672f, type: 3}
   containerName: Cobler Shaker
-  containerVolume: 600
+  containerVolume: 300

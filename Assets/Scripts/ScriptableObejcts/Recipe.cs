@@ -5,16 +5,45 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Recipe", menuName = "Recipe")]
 public class Recipe : ScriptableObject
 {
-    public Ingredient Base;
+    public LiquorType Base;
 
-    public List<ScriptableObject> recipeList;
-    public List<float> recipeAmounts;
+    [SerializeField]
+    private List<ScriptableObject> recipeList;
+    [SerializeField]
+    private List<float> recipeAmounts;
 
-    public Glass glass;
-    public List<Garnish> garnishList;
+    [SerializeField]
+    private Glass glass;
+    [SerializeField]
+    private List<Garnish> garnishList;
 
-    public static int RecipeGrade(Recipe recipe)
+
+    public List<ScriptableObject> RecipeList
     {
-        return -1;
+        get
+        {
+            return recipeList;
+        }
+    }
+    public List<float> RecipeAmounts
+    {
+        get
+        {
+            return recipeAmounts;
+        }
+    }
+    public Glass GlassAsset
+    {
+        get
+        {
+            return glass;
+        }
+    }
+    public List<Garnish> GarnishList
+    {
+        get
+        {
+            return garnishList;
+        }
     }
 }
